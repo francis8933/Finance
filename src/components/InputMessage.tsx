@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-export default function InputMessage(handleClick: React.FC): React.JSX.Element {
+type obj = {
+  handleClick: (message: string) => void;
+};
+export default function InputMessage({ handleClick }: obj): React.JSX.Element {
   const [inputMenssage, setInputMessage] = useState('');
 
   const handleChange = (e: React.SyntheticEvent) => {

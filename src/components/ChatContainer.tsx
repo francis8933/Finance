@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ChatBox from './ChatBox';
 import InputMessage from './InputMessage';
 
 export default function ChatContainer(): React.JSX.Element {
-  const [message, setMessage] = useState([{ sendBy: '', text: '', date: '' }]);
+  const [message, setMessage] = useState([]);
 
   //   useEffect(SetMessage(data), []);
 
-  const handleClick = (inputMessage) => {
+  const handleClick = (inputMessage: string): void => {
     //send message to the database
-    e.preventDefault();
     console.log('the msg is', inputMessage);
   };
 
