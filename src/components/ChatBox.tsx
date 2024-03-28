@@ -9,13 +9,10 @@ type messageData = {
   date: string;
 };
 
-export default function ChatBox({ message }: obj): React.JSX.Element {
-  let KeyNumber = 0;
-
-  const listOfMessages = message.map((msg: messageData) => {
-    KeyNumber++;
+const ChatBox = ({ message }: obj): React.JSX.Element => {
+  const listOfMessages = message.map((msg: messageData, index: number) => {
     return (
-      <div key={KeyNumber}>
+      <div key={index}>
         <p>{msg.sendBy}</p>
         <p>{msg.text}</p>
         <p>{msg.date}</p>
@@ -24,4 +21,5 @@ export default function ChatBox({ message }: obj): React.JSX.Element {
     );
   });
   return <div>{listOfMessages}</div>;
-}
+};
+export default ChatBox;

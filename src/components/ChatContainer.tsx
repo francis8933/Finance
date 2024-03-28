@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ChatBox from './ChatBox';
 import InputMessage from './InputMessage';
 
-export default function ChatContainer(): React.JSX.Element {
+type obj = {
+  user: string;
+};
+const ChatContainer = (user: obj): JSX.Element => {
   const [message, setMessage] = useState([{ sendBy: '', text: '', date: '' }]);
 
   //   useEffect(SetMessage(data), []);
@@ -21,9 +24,10 @@ export default function ChatContainer(): React.JSX.Element {
 
   return (
     <div className="ChatContainer">
-      <h2>Chat Container</h2>
+      <h3>Current User: {user.user}</h3>
       <ChatBox message={message} />
       <InputMessage handleClick={handleClick} />
     </div>
   );
-}
+};
+export default ChatContainer;
