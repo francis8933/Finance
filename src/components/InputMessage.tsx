@@ -8,7 +8,8 @@ export default function InputMessage({ handleClick }: obj): React.JSX.Element {
 
   const handleChange = (e: React.SyntheticEvent) => {
     console.log('getting in handleChange', e);
-    setInputMessage('Hello');
+    const target = e.target as HTMLInputElement;
+    setInputMessage(target.value);
   };
 
   return (

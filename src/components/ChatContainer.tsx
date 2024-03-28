@@ -3,13 +3,20 @@ import ChatBox from './ChatBox';
 import InputMessage from './InputMessage';
 
 export default function ChatContainer(): React.JSX.Element {
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState([{ sendBy: '', text: '', date: '' }]);
 
   //   useEffect(SetMessage(data), []);
 
   const handleClick = (inputMessage: string): void => {
     //send message to the database
-    console.log('the msg is', inputMessage);
+    setMessage([
+      ...message,
+      {
+        sendBy: 'Maria',
+        text: inputMessage,
+        date: '01-01-1990',
+      },
+    ]);
   };
 
   return (
