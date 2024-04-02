@@ -1,45 +1,21 @@
-import { useState } from 'react';
+import React from 'react';
 
 type obj = {
-  handleSubmit: (e: React.SyntheticEvent, email: string) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
 };
 
 const UserLogin = ({ handleSubmit }: obj): JSX.Element => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleChange = (e: React.SyntheticEvent, passW: string) => {
-    const target = e.target as HTMLInputElement;
-    if (passW === 'password') setPassword(target.value);
-    else setEmail(target.value);
-  };
-
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
-          email:{' '}
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => handleChange(e, 'email')}
-          ></input>
+          email: <input type="text" name="email" defaultValue={''}></input>
         </label>
         <label>
           Password:{' '}
-          <input
-            type="text"
-            value={password}
-            onChange={(e) => handleChange(e, 'password')}
-          ></input>
+          <input type="text" name="password" defaultValue={''}></input>
         </label>
-        <button
-          onClick={(e) => {
-            handleSubmit(e, email);
-          }}
-        >
-          Log in
-        </button>
+        <button type="submit">Log in</button>
       </form>
     </div>
   );

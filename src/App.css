@@ -1,42 +1,33 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app {
+  padding: 40;
+  background-color: rgb(195, 195, 195);
+  color: black;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.chatBotReciever {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.reciever {
+  background-color: rgb(35, 220, 158);
+  padding: 10;
+  border-radius: 10;
+  color: black;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.sender {
+  background-color: rgb(251, 251, 251);
+  padding: 10;
+  border-radius: 10;
+  color: black;
 }
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.chatBotSender {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.inputMessage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

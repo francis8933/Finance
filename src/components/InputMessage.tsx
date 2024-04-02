@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 type obj = {
-  handleClick: (message: string) => void;
+  addMessage: (message: string) => void;
 };
-const InputMessage = ({ handleClick }: obj): JSX.Element => {
+const InputMessage = ({ addMessage }: obj): JSX.Element => {
   const [inputMenssage, setInputMessage] = useState('');
 
   const handleChange = (e: React.SyntheticEvent) => {
@@ -17,7 +17,7 @@ const InputMessage = ({ handleClick }: obj): JSX.Element => {
       <input name="inputText" onChange={handleChange} value={inputMenssage} />
       <button
         onClick={() => {
-          handleClick(inputMenssage);
+          addMessage(inputMenssage);
           setInputMessage('');
         }}
       >

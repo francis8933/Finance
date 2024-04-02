@@ -1,32 +1,81 @@
-import { useState } from 'react';
-import ChatBox from './ChatBox';
+import { useEffect, useState } from 'react';
+import ChatBoxReciever, { ChatBoxSender } from './ChatBox';
 import InputMessage from './InputMessage';
+import socketIOClient from 'socket.io-client';
 
 type obj = {
   user: string;
+  logOut: () => void;
 };
-const ChatContainer = (user: obj): JSX.Element => {
+type messageData = {
+  sendBy: string;
+  text: string;
+  date: string;
+};
+const ChatContainer = ({ user, logOut }: obj): JSX.Element => {
+  const sockteio = socketIOClient('http://localhost:3000');
+
   const [message, setMessage] = useState([{ sendBy: '', text: '', date: '' }]);
 
-  //   useEffect(SetMessage(data), []);
+  useEffect(() => {
+    sockteio.on('chat', (senderChat) => {
+      setMessage(senderChat);
+    });
+  });
 
-  const handleClick = (inputMessage: string): void => {
+  const sendChatToSocket = (
+    chat: Array<{ sendBy: string; text: string; date: string }>
+  ) => {
+    sockteio.emit('chat', chat);
+  };
+
+  const addMessage = (inputMessage: string): void => {
     //send message to the database
+
     setMessage([
       ...message,
       {
-        sendBy: 'Maria',
+        sendBy: user,
+        text: inputMessage,
+        date: '01-01-1990',
+      },
+    ]);
+    sendChatToSocket([
+      ...message,
+      {
+        sendBy: user,
         text: inputMessage,
         date: '01-01-1990',
       },
     ]);
   };
 
+  const MessageList = () => {
+    return message.map((msg: messageData, index: number) => {
+      if (msg.sendBy === user)
+        return (
+          <ChatBoxSender
+            key={index}
+            inputMessage={msg.text}
+            user={msg.sendBy}
+          />
+        );
+      return (
+        <ChatBoxReciever
+          key={index}
+          inputMessage={msg.text}
+          user={msg.sendBy}
+        />
+      );
+    });
+  };
+
   return (
-    <div className="ChatContainer">
-      <h3>Current User: {user.user}</h3>
-      <ChatBox message={message} />
-      <InputMessage handleClick={handleClick} />
+    <div>
+      <h3>User Name: {user}</h3>
+      <button onClick={logOut}>Log Out</button>
+      <MessageList />
+      <InputMessage addMessage={addMessage} />
     </div>
   );
 };
