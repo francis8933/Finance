@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ChatBoxReciever, { ChatBoxSender } from './ChatBox';
 import InputMessage from './InputMessage';
-import socketIOClient from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 type obj = {
   user: string;
@@ -13,7 +13,13 @@ type messageData = {
   date: string;
 };
 const ChatContainer = ({ user, logOut }: obj): JSX.Element => {
-  const sockteio = socketIOClient('http://localhost:3000');
+  const sockteio = io('http://localhost:3000/', {
+    transports: ['websocket'],
+  });
+
+  sockteio.on('connect_error', (err) => {
+    console.log(`connect_error due to ${err.message}`);
+  });
 
   const [message, setMessage] = useState([{ sendBy: '', text: '', date: '' }]);
 
